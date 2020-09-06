@@ -1,0 +1,11 @@
+index:
+   path: /
+   controller: App\Controller\PremierController::index
+
+
+addrdv:
+   path: /addrdv
+   controller: App\Controller\PremierController::addrdv
+
+
+ 
