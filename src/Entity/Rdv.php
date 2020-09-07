@@ -67,6 +67,26 @@ class Rdv
      */
     private $rdvPrestation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="rdvs")
+     */
+    private $customer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Statut::class, inversedBy="rdvs")
+     */
+    private $rdvStatus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Motif::class, inversedBy="rdvs")
+     */
+    private $rdvMotif;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Zone::class, inversedBy="rdvs")
+     */
+    private $rdvZone;
+
    
 
   
@@ -193,6 +213,54 @@ class Rdv
     public function setRdvPrestation(?Prestation $rdvPrestation): self
     {
         $this->rdvPrestation = $rdvPrestation;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Client
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Client $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getRdvStatus(): ?Statut
+    {
+        return $this->rdvStatus;
+    }
+
+    public function setRdvStatus(?Statut $rdvStatus): self
+    {
+        $this->rdvStatus = $rdvStatus;
+
+        return $this;
+    }
+
+    public function getRdvMotif(): ?Motif
+    {
+        return $this->rdvMotif;
+    }
+
+    public function setRdvMotif(?Motif $rdvMotif): self
+    {
+        $this->rdvMotif = $rdvMotif;
+
+        return $this;
+    }
+
+    public function getRdvZone(): ?Zone
+    {
+        return $this->rdvZone;
+    }
+
+    public function setRdvZone(?Zone $rdvZone): self
+    {
+        $this->rdvZone = $rdvZone;
 
         return $this;
     }

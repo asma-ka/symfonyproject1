@@ -54,6 +54,11 @@ class Prestataire
      */
     private $prestations;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
     public function __construct()
     {
         $this->prestations = new ArrayCollection();
@@ -163,6 +168,18 @@ class Prestataire
                 $prestation->setPrstionPrstaire(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
