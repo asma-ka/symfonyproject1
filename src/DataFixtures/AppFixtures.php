@@ -53,6 +53,8 @@ class AppFixtures extends Fixture
         $manager->persist($competence);
         }
         //gerons les prestataire:
+           
+           
         for ($i = 0; $i < 12; $i++) {
             $prestataire = new Prestataire();
             $prestataire  ->setNom($faker->Lastname)
@@ -75,7 +77,7 @@ class AppFixtures extends Fixture
         $manager->persist($dugreUrgence);
           }
           //gerons les prestation:
-    
+          $prestations = [];
           for ($i = 0; $i < 15; $i++) {
               $prestation = new Prestation();
              
@@ -84,38 +86,44 @@ class AppFixtures extends Fixture
                           -> setGenre($faker->sentence())
                           -> setPstionDrUrgc($dugreUrgence)
                           -> setPrstionPrstaire($prestataire) ;
-         $manager->persist($prestation);                
+         $manager->persist($prestation); 
+         $prestations[] =  $prestation;                
           }
-          //nous gerons les Equipement
+          //nous gerons les Equipement:
+           $equipements = [];
           for ($i = 0; $i < 15; $i++) {
               $equipement = new Equipement();
               $equipement -> setAdressMac($faker->macAddress)
                           -> setNumeroSerie(mt_rand(13, 30))
                           -> setGarentie(mt_rand(1, 2))
                           ->  setDateDbGartie($faker->dateTime());
-        $manager->persist($equipement);               
+        $manager->persist($equipement);    
+        $equipements[] =  $equipement;            
          }
       // Nous gerons les lignes:
+        $lignes = [];
          for ($i = 0; $i < 10; $i++) {
               $ligne = new Ligne();
               $ligne -> setNumerLigne(mt_rand(1, 25))
                      -> setPlanTarifaire(mt_rand(100, 500))
                      -> setDureeEngagement(mt_rand(1, 5));
             $manager->persist($ligne);
+            $lignes[] =  $ligne; 
          }
          // Nous gerons les Clients:
-        
+         $clients = [];
          for ($i = 0; $i < 10; $i++) {
              $client = new Client();
              $client->setNom($faker->Lastname)
                     ->setPrenom($faker->Firstname)
                     ->setAdress($faker->streetAddress)
-                    ->setDateprivisionnelle ( $faker->dateTime())
+                    //->setDateprevisionnelle ( $faker->dateTime())
                     ->setCordonees($faker->sentence(3))
                     ->setTypeIdentification($faker->sentence())
                     ->setNumeroIdentification(mt_rand(111, 330)) 
                     ->setNumeroContrat(mt_rand(405478, 985744)) ;
                     $manager->persist($client);
+                    $clients[] =  $client;  
                 }
     // Nous gerons les Statut:
        
@@ -136,6 +144,7 @@ class AppFixtures extends Fixture
         $manager->persist($motif);
         }
         // Nous gerons les Zone:
+         $zones = [];
         for ($i = 1; $i <= 9; $i++) {
             $zone = new Zone();
              $zone -> setLibelle($faker->word)
@@ -143,6 +152,7 @@ class AppFixtures extends Fixture
                    -> setCodePostal($faker->postcode )
                    -> setDescription($faker->sentence(3)); 
             $manager->persist($zone);
+            $zones[] = $zone;
         }
 
         //Nous gérons les utilisateurs
@@ -173,6 +183,9 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 30; $i++) {
          $rdv = new Rdv();
          $user = $users[mt_rand(0, count($users) - 1)];
+         $equipement = $equipements[mt_rand(0, count($equipements) - 1)];
+         $client = $clients[mt_rand(0, count($clients) - 1)];
+         $ligne = $lignes[mt_rand(0, count($lignes) - 1)];
          $rdv->setNumeroRdv(mt_rand(11, 20))
              ->setResultat($faker->sentence())
              ->setCommentaire($faker->paragraph(2)) 

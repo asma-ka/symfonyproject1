@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client index{% endblock %}
+
+{% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+    <h1>liste des clients</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>TpIdentification</th>
+                <th>NumIdentification</th>
+                <th>Adress</th>
+                <th>NumeroContrat</th>
+                {#<th>Dateprivisionnelle</th>#}
+                <th>Cordonees</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.prenom }}</td>
+                <td>{{ client.typeIdentification }}</td>
+                <td>{{ client.numeroIdentification }}</td>
+                <td>{{ client.adress }}</td>
+                <td>{{ client.NumeroContrat }}</td>
+               {# <td>{{ client.dateprivisionnelle ? client.dateprivisionnelle|date('Y-m-d H:i:s') : '' }}</td>#}
+                <td>{{ client.cordonees }}</td>
+                <td>
+                    <a href="{{ path('client_show', {'id': client.id}) }}"><button type="submit" class="btn btn-primary ">show </button></a> <br>
+                    <a href="{{ path('client_edit', {'id': client.id}) }}"><button type="submit" class="btn btn-primary ">edit</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('client_new') }}"><button type="submit" class="btn btn-primary float-left">Create new</button></a>
+    </div>
+{% endblock %}

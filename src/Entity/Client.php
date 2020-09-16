@@ -49,10 +49,7 @@ class Client
      */
     private $NumeroContrat;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateprivisionnelle;
+   
 
     /**
      * @ORM\Column(type="text")
@@ -64,6 +61,8 @@ class Client
      */
     private $rdvs;
 
+  
+
     public function __construct()
     {
         $this->rdvs = new ArrayCollection();
@@ -73,12 +72,23 @@ class Client
     {
         return $this->id;
     }
+     /**
+     * Get Nom
+     *
+     * @return string
+     */
 
     public function getNom(): ?string
     {
         return $this->nom;
     }
-
+    /**
+     * Set Nom
+     *
+     * @param string $nom
+     *
+     * @return Client
+     */
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
@@ -90,6 +100,18 @@ class Client
     {
         return $this->prenom;
     }
+    public function __toString()
+    {
+        return $this->nom;
+        
+    }
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return Client
+     */
 
     public function setPrenom(string $prenom): self
     {
@@ -97,11 +119,23 @@ class Client
 
         return $this;
     }
+    /**
+     * Get typeIdentification
+     *
+     * @return string
+     */
 
     public function getTypeIdentification(): ?string
     {
         return $this->typeIdentification;
     }
+    /**
+     * Set typeIdentification
+     *
+     * @param string $typeIdentification
+     *
+     * @return Client
+     */
 
     public function setTypeIdentification(string $typeIdentification): self
     {
@@ -109,13 +143,25 @@ class Client
 
         return $this;
     }
+    /**
+     * Get numIdentification
+     *
+     * @return int
+     */
 
     public function getNumeroIdentification(): ?int
     {
         return $this->numeroIdentification;
     }
+    /**
+     * Set numIdentification
+     *
+     * @param int $numeroIdentification
+     *
+     * @return Client
+     */
 
-    public function setNumeroIdentification(int $numeroIdentification): self
+    public function setNumeroIdentification( $numeroIdentification)
     {
         $this->numeroIdentification = $numeroIdentification;
 
@@ -126,8 +172,15 @@ class Client
     {
         return $this->adress;
     }
+    /**
+     * Set adress
+     *
+     * @param string $adress
+     *
+     * @return Client
+     */
 
-    public function setAdress(string $adress): self
+    public function setAdress( $adress)
     {
         $this->adress = $adress;
 
@@ -138,32 +191,41 @@ class Client
     {
         return $this->NumeroContrat;
     }
+    /**
+     * Set NumeroContrat
+     *
+     * @param int $NumeroContrat
+     *
+     * @return Client
+     */
 
-    public function setNumeroContrat(int $NumeroContrat): self
+    public function setNumeroContrat( $NumeroContrat)
     {
         $this->NumeroContrat = $NumeroContrat;
 
         return $this;
     }
-
-    public function getDateprivisionnelle(): ?\DateTimeInterface
-    {
-        return $this->dateprivisionnelle;
-    }
-
-    public function setDateprivisionnelle(\DateTimeInterface $dateprivisionnelle): self
-    {
-        $this->dateprivisionnelle = $dateprivisionnelle;
-
-        return $this;
-    }
+/**
+     * Set cordonnees
+     *
+     * @param string $cordonees
+     *
+     * @return Client
+     */
+   
 
     public function getCordonees(): ?string
     {
         return $this->cordonees;
     }
-
-    public function setCordonees(string $cordonees): self
+/**
+     * Set cordonnees
+     *
+     * @param string $cordonees
+     *
+     * @return Client
+     */
+    public function setCordonees( $cordonees)
     {
         $this->cordonees = $cordonees;
 
@@ -200,4 +262,7 @@ class Client
 
         return $this;
     }
+
+
+
 }

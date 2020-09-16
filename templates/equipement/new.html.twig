@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Equipement{% endblock %}
+{% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+    <h1>Create new Equipement</h1>
+
+    {{ include('equipement/_form.html.twig') }}
+            </div>
+
+    <button type="button" class="btn btn-secondary float-left " style="margin-top: -41px"> <a href="{{ path('equipement_index') }}">Retour </a></button>
+</div>
+</div>
+
+
+{% endblock %}

@@ -87,6 +87,10 @@ class Prestation
     {
         return $this->genre;
     }
+    public function __toString()
+    {
+        return $this->genre;
+    }
 
     public function setGenre(string $genre): self
     {

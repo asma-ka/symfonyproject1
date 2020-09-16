@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rdv index{% endblock %}
+
+{% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+    <h1>Rdv index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+              {#  <th>Id</th> #}
+                <th>NumeroRdv</th>
+                <th>Resultat</th>
+                <th>Commentaire</th>
+                <th>Prix</th>
+                <th>ClientSatisfat</th>
+                {#<th>Signature</th>#}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rdv in rdvs %}
+            <tr>
+              {#}  <td>{{ rdv.id }}</td>#}
+                <td>{{ rdv.numeroRdv }}</td>
+                <td>{{ rdv.resultat }}</td>
+                <td>{{ rdv.commentaire }}</td>
+                <td>{{ rdv.prix }}</td>
+                <td>{{ rdv.clientSatisfat ? 'Yes' : 'No' }}</td>
+             {#}   <td>{{ rdv.signature }}</td>#}
+                <td>
+                    <a href="{{ path('rdv_show', {'id': rdv.id}) }}">show</a>
+                    <a href="{{ path('rdv_edit', {'id': rdv.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+
+    <a href="{{ path('rdv_new') }}">Create new</a>
+{% endblock %}

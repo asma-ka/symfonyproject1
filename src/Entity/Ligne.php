@@ -48,7 +48,10 @@ class Ligne
     {
         return $this->id;
     }
-
+    public function __toString()
+    {
+        return $this->planTarifaire;
+    }
     public function getNumerLigne(): ?int
     {
         return $this->numerLigne;

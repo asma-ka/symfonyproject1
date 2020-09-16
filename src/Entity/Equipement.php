@@ -65,6 +65,10 @@ class Equipement
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->adressMac;
+    }
 
     public function getNumeroSerie(): ?string
     {

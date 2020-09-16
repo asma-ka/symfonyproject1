@@ -70,6 +70,10 @@ class Motif
     {
         return $this->description;
     }
+    public function __toString()
+    {
+        return $this->ordre;
+    }
 
     public function setDescription(string $description): self
     {

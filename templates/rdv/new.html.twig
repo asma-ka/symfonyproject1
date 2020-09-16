@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Rdv{% endblock %}
+
+{% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+    <h4> nouveau rendez vous </h4>
+    
+
+    {{ include('rdv/_form.html.twig') }}
+
+    
+    <button type="button" class="btn btn-secondary float-left " style="margin-top: -41px"><a href="{{ path('rdv_index') }}">retour</a></button>
+    </div>
+    </div>
+    
+   
+{% endblock %}

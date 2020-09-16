@@ -9,6 +9,7 @@
     <meta name="author" content="PIXINVENT">
         <title>{% block title %}MediDocs !{% endblock %}</title>
         {% block stylesheets %}
+    
          <link rel="apple-touch-icon" href="/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -41,12 +42,14 @@
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href=" https://getbootstrap.com/docs/4.4/getting-started/introduction/#css ">
     <!-- END: Custom CSS-->
 
         {% endblock %}
     </head>
     <body>
-        {% block body %}<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+        {% block body %}
+        <body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
 
     <!-- BEGIN: Header-->
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-dark navbar-shadow">
@@ -137,11 +140,12 @@
                                 <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center" href="javascript:void(0)">View all notifications</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John Doe</span></div><span><img class="round" src="images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                            {% if app.user %}
+                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{app.user.nom}} {{app.user.prenom}}</span></div><span><img class="round" src="images/portrait/small/avatar-s-22.jpg" alt="avatar" height="40" width="40"></span>
                             </a>
+                            {% endif %} 
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="{{ path('account_profile') }}"><i class="feather icon-user"></i> Editer Profil</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ path('account_login') }}"><i class="feather icon-power"></i> déconnexion</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ path('account_logout') }}"><i class="feather icon-power"></i> déconnexion</a>
                             </div>
                         </li>
                     </ul>
@@ -149,7 +153,7 @@
             </div>
         </div>
     </nav>
-    <ul class="main-search-list-defaultlist d-none">
+    <ul  class="main-search-list-defaultlist d-none">
         <li class="d-flex align-items-center"><a class="pb-25" href="#">
                 <h6 class="text-primary mb-0">Files</h6>
             </a></li>
@@ -254,9 +258,9 @@
     
                     <li class=" nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">Gestions des Rdv</span></a>
                         <ul class="menu-content">
-                            <li><a href="{{path('addrdv')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Wish List">Ajouter un Rdv</span></a>
+                            <li><a href="{{path('rdv_new')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Wish List">Ajouter un Rdv</span></a>
                             </li>
-                            <li><a href=""><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Checkout">Afficher un Rdv</span></a>
+                            <li><a href="{{path('rdv_index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Checkout">Afficher un Rdv</span></a>
                             </li>
                         </ul>
                     </li>
@@ -300,9 +304,9 @@
                 
                     <li class=" nav-item"><a href="#"><i class="feather icon-zap"></i><span class="menu-title" data-i18n="Starter kit">Annuaire des clients</span></a>
                         <ul class="menu-content">
-                            <li><a href=""><i class="feather icon-circle"></i><span class="menu-item" data-i18n="2 columns">Ajouter un client</span></a>
+                            <li><a href="{{path('client_new')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="2 columns">Ajouter un client</span></a>
                             </li>
-                            <li><a href=""><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Fixed navbar">Afficher les clients</span></a>
+                            <li><a href=""{{path('client_index')}}""><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Fixed navbar">Afficher les clients</span></a>
                             </li>
                         </ul>
                     </li>
@@ -312,9 +316,9 @@
         </div>
     </div>
     <!-- END: Main Menu-->
-
+{% block content %} {% endblock %}
     
-{% block content %}{% endblock %}
+{% endblock %}
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
@@ -333,7 +337,6 @@
 <!-- END: Body-->
 
 
-{% endblock %}
         {% block javascripts %}<script src="/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->
     <script src="https://unpkg.com/feather-icons"></script>
@@ -343,14 +346,16 @@
     <script src="/js/charts/apexcharts.min.js"></script>
     <script src="/js/extensions/tether.min.js"></script>
     <script src="/js/extensions/shepherd.min.js"></script>
-    <!-- END: Page Vendor JS-->
+    <script src="/js/custom.js"></script>
 
+    <!-- END: Page Vendor JS-->
+ 
     <!-- BEGIN: Theme JS-->
     <script src="/js/core/app-menu.js"></script>
     <script src="/js/core/app.js"></script>
     <script src="/js/scripts/components.js"></script>
     <!-- END: Theme JS-->
-
+ <script src="https://getbootstrap.com/docs/4.4/getting-started/introduction/#js "></script>
     <!-- BEGIN: Page JS-->
     <script src="/js/scripts/pages/dashboard-analytics.js"></script>
     <!-- END: Page JS-->

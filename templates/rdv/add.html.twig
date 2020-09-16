@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+    ajouter RDV
+{% endblock %}
 {% block content %}
-
 <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -10,17 +12,7 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Ajouter Un Rendez-vous</h2>
-                            <div class="breadcrumb-wrapper col-12">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Tableau de board</a>
-                                    </li>
-                                    <li class="breadcrumb-item"><a href="#">Gestions</a>
-                                    </li>
-                                    <li class="breadcrumb-item active"><a href="Rdv/addRdv.html">Ajouter Un Rendez-vous</a>
-                                    </li>
-                                </ol>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -566,4 +558,15 @@
         </div>
     </div>
     <!-- END: Content-->
-{% endblock %}
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2020<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+{% endblock  %}

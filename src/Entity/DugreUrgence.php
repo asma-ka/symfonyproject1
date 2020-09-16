@@ -77,6 +77,10 @@ class DugreUrgence
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->ordre;
+    }
 
     public function getOrdre(): ?string
     {

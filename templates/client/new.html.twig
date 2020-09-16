@@ -1,0 +1,21 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}New Client{% endblock %}
+
+{% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+    <h1>Creer un nouveau client</h1>
+
+    {{ include('client/_form.html.twig') }}
+
+    <!-- <a href="{{ path('client_index') }}">back to list</a> -->
+    </div>
+    </div>
+{% endblock %}

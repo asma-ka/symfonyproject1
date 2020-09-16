@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement{% endblock %}
+
+{% block body %}
+    <h1>Equipement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ equipement.id }}</td>
+            </tr>
+            <tr>
+                <th>AdressMac</th>
+                <td>{{ equipement.adressMac }}</td>
+            </tr>
+            <tr>
+                <th>NumeroSerie</th>
+                <td>{{ equipement.numeroSerie }}</td>
+            </tr>
+            <tr>
+                <th>Garentie</th>
+                <td>{{ equipement.garentie }}</td>
+            </tr>
+            <tr>
+                <th>DateDbGartie</th>
+                <td>{{ equipement.DateDbGartie ? equipement.DateDbGartie|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('equipement_index') }}">back to list</a>
+
+    <a href="{{ path('equipement_edit', {'id': equipement.id}) }}">edit</a>
+
+    {{ include('equipement/_delete_form.html.twig') }}
+{% endblock %}

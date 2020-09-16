@@ -101,6 +101,10 @@ class User implements UserInterface
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->nom;
+    }
 
     public function getPrenom(): ?string
     {
@@ -160,6 +164,8 @@ class User implements UserInterface
         $this->description = $description;
 
         return $this;
+    } public function getFullName() {
+        return "{$this->nom} {$this->prenom}";
     }
 
     /**

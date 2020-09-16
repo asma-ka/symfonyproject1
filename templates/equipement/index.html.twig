@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement index{% endblock %}
+
+{% block content %}
+    <h1>Equipement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>AdressMac</th>
+                <th>NumeroSerie</th>
+                <th>Garentie</th>
+                <th>DateDbGartie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipement in equipements %}
+            <tr>
+                <td>{{ equipement.id }}</td>
+                <td>{{ equipement.adressMac }}</td>
+                <td>{{ equipement.numeroSerie }}</td>
+                <td>{{ equipement.garentie }}</td>
+                <td>{{ equipement.DateDbGartie ? equipement.DateDbGartie|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('equipement_show', {'id': equipement.id}) }}">show</a>
+                    <a href="{{ path('equipement_edit', {'id': equipement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('equipement_new') }}">Create new</a>
+{% endblock %}

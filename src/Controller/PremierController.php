@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PremierController extends AbstractController
 {
+    
     public function index()
     {
         return $this->render('premier/index.html.twig', [
@@ -15,7 +16,7 @@ class PremierController extends AbstractController
     }
     public function addrdv()
     {
-        return $this->render('Rdv/addRDV.html.twig', [
+        return $this->render('rdv/add.html.twig', [
             'controller_name' => 'PremierController',
         ]);
     }
