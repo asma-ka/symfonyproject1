@@ -11,9 +11,9 @@
       <div class="card-body">
             
                         
-<div class="container">
+{# <div class="container">
  
-  <ul {#style="border:1px solid skyblue; padding: 6px 12px;"##} class="nav nav-tabs"> 
+  <ul style="border:1px solid skyblue; padding: 6px 12px;" class="nav nav-tabs"> 
     <li  onclick="f1()" style="font-size:17px;  padding: 6px 12px;" class="active"><a data-toggle="tab" href="#home">Donnees Rdv</a></li>
     <li  onclick="f1()" style="margin-left:10px;font-size:17px; padding: 6px 12px;" ><a data-toggle="tab" href="#menu1">Donnees equipement</a></li>
     <li  onclick="f1()" style="margin-left:10px;font-size:17px;padding: 6px 12px;" ><a data-toggle="tab" href="#menu1">Donnees Ligne</a></li>
@@ -52,27 +52,82 @@
 
 
     </div>
+ #}
 
+ <ul class="tab" style="margin-top: -20px">
+  <li><a href="#" class="tablinks"  onclick="openCity(event, 'London')">Générale</a></li>
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'Paris')">Données équipements</a></li>
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'Tokyo')">Données clients</a></li>
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'kech')">Données prestation</a></li>
+  <li><a href="#" class="tablinks" onclick="openCity(event, 'errach')">Données lignes</a></li>
+</ul>
 
+<div id="London" class="tabcontent" >
+<div class="row">
+      <div class="col-12">
+            <div class="card">
+               <div class="card-header">
+        
+              </div>
+           <div class="card-content">
+      <div class="card-body">
+      
+  <button class="button" disabled="disabled" >Génerale</button>
+  
+  <table class="editrdvform" style="width:100%;"> 
+  <tr>
+    <th>{{ form_row(form.numeroRdv)}}</th>
+  </tr>
+  <tr>
+    <th>{{ form_row(form.rdvLigne)}}</th>
+    
+  </tr>
+  <tr>
+    <th>{{ form_row(form.rdvEqipment)}}</th>
+    
+  </tr>
+  <tr>
+    <th>{{ form_row(form.rdvPrestation)}}</th>
+    
+  </tr>
+  
+  <tr>
+    <th>{{ form_row(form.rdvStatus)}}</th>
+    
+  </tr>
 
-<div class="tab-content">
-    <div id="menu1 nouvpresid" class="tab-pane fade ">
-        {{ include('equipement/_form.html.twig') }}
-    </div>
-    </div>
-  <div id="menu1 menu1id" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>this is the content of the 2nd menu</p>
-    </div><div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>this is the content of the 2nd menu</p>
-    </div><div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>this is the content of the 2nd menu</p>
-    </div>
-   
-  </div>
+</table>
+  </div> 
 </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div id="Paris" class="tabcontent">
+  <h3>Equipements</h3>
+  
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+  </div>
+  <div id="kech" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+  </div>
+  <div id="errach" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+
+
    
 </div>
 </div>

@@ -23,7 +23,7 @@ class RdvType extends AbstractType
             //->add('author')
             ->add('rdvLigne')
             ->add('rdvEqipment')
-            //->add('rdvPrestation')
+            ->add('rdvPrestation')
     //->add('customer')
             ->add('rdvStatus')
            // ->add('rdvMotif')
@@ -32,13 +32,14 @@ class RdvType extends AbstractType
            //  ->add('customer', EntityType::class, [
                 //'class' => Client::class,
             //])
-            ->add('rdvPrestation', ChoiceType::class, [
-                'action' => Prestation::class,
-                'choice_label' => 'titre',
-               'multiple' => false,
-               'expanded' => false,
+            // ->add('rdvPrestation', ChoiceType::class, [
+            //     'action' => Prestation::class,
+            //     'choice_label' => 'titre',
+            //    'multiple' => false,
+            //    'expanded' => false,
               
-            ]);
+            // ])
+            ;
 
     }
 
