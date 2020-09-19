@@ -42,7 +42,7 @@ ul.tab li a {
 }
 
 .button {
-    background-color: #6f4eb9;
+    background-color: #466df0;
     border: none;
     color: white;
     padding: 15px 22px;
@@ -59,7 +59,7 @@ ul.tab li a {
 /* Change background color of links on hover */
 
 ul.tab li a:hover {
-    background-color: rgb(181, 187, 243);
+    background-color: #323b53;
     border-radius: 12px
 }
 
@@ -68,7 +68,7 @@ ul.tab li a:hover {
 
 ul.tab li a:focus,
 .active {
-    background-color: rgb(181, 187, 243);
+    background-color: #323b53;
     border-radius: 12px
 }
 
@@ -78,7 +78,7 @@ ul.tab li a:focus,
 .tabcontent {
     display: none;
     padding: 6px 12px;
-    border: 1px solid rgb(14, 3, 66);
+    border: 1px solid #061f30;
     border-top: none;
 }
 

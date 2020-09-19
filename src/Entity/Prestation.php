@@ -34,20 +34,19 @@ class Prestation
      */
     private $genre;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=DugreUrgence::class, inversedBy="prestations")
-     */
-    private $pstionDrUrgc;
+    
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="prestations")
-     */
-    private $prstionPrstaire;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="rdvPrestation")
      */
     private $rdvs;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $degreeUrgence;
 
     public function __construct()
     {
@@ -99,30 +98,7 @@ class Prestation
         return $this;
     }
 
-    public function getPstionDrUrgc(): ?DugreUrgence
-    {
-        return $this->pstionDrUrgc;
-    }
-
-    public function setPstionDrUrgc(?DugreUrgence $pstionDrUrgc): self
-    {
-        $this->pstionDrUrgc = $pstionDrUrgc;
-
-        return $this;
-    }
-
-    public function getPrstionPrstaire(): ?Prestataire
-    {
-        return $this->prstionPrstaire;
-    }
-
-    public function setPrstionPrstaire(?Prestataire $prstionPrstaire): self
-    {
-        $this->prstionPrstaire = $prstionPrstaire;
-
-        return $this;
-    }
-
+   
     /**
      * @return Collection|Rdv[]
      */
@@ -150,6 +126,18 @@ class Prestation
                 $rdv->setRdvPrestation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDegreeUrgence(): ?string
+    {
+        return $this->degreeUrgence;
+    }
+
+    public function setDegreeUrgence(string $degreeUrgence): self
+    {
+        $this->degreeUrgence = $degreeUrgence;
 
         return $this;
     }

@@ -67,15 +67,15 @@ class AppFixtures extends Fixture
         $manager->persist($prestataire);
         }
 
-          //gerons les DugreeUrgence:
-          for ($i = 0; $i < 8; $i++) {
-              $dugreUrgence = new DugreUrgence();
-              $dugreUrgence ->setLibelle($faker->word)
-                            ->setDescription($faker->sentence(2))
-                            ->setOrdre($faker->sentence())
-                            ->setActif($faker->boolean());
-        $manager->persist($dugreUrgence);
-          }
+         //gerons les DugreeUrgence:
+        //   for ($i = 0; $i < 8; $i++) {
+        //       $dugreUrgence = new DugreUrgence();
+        //       $dugreUrgence ->setLibelle($faker->word)
+        //                     ->setDescription($faker->sentence(2))
+        //                     ->setOrdre($faker->sentence())
+        //                     ->setActif($faker->boolean());
+        // $manager->persist($dugreUrgence);
+        //   }
           //gerons les prestation:
           $prestations = [];
           for ($i = 0; $i < 15; $i++) {
@@ -84,8 +84,9 @@ class AppFixtures extends Fixture
               $prestation -> setNumeroPrestation(mt_rand(1, 20))
                           -> setTitre($faker->word)
                           -> setGenre($faker->sentence())
-                          -> setPstionDrUrgc($dugreUrgence)
-                          -> setPrstionPrstaire($prestataire) ;
+                           -> setDegreeUrgence($faker->word);
+                         // -> setPstionDrUrgc($dugreUrgence)
+                          //-> setPrstionPrstaire($prestataire) ;
          $manager->persist($prestation); 
          $prestations[] =  $prestation;                
           }
@@ -126,22 +127,28 @@ class AppFixtures extends Fixture
                     $clients[] =  $client;  
                 }
     // Nous gerons les Statut:
-       
-       for ($i = 1; $i <= 10; $i++) {
+       $statuts= [];
+       for ($i = 1; $i <= 3
+       ; $i++) {
+           
         $statut = new Statut();
            $statut  -> setLibelle($faker->word)
                     -> setOrdre($faker->word)
                     -> setDescription($faker->sentence(3));
          $manager->persist($statut);
+         $statuts[] = $statut;
        }
        // Nous gerons les motif:
+        $motifs= [];
         for ($i = 1; $i <= 9; $i++) {
             $motif = new Motif();
+
             $motif   -> setLibelle($faker->word)
                      -> setOrdre($faker->word)
                      ->setActif($faker->boolean)
                      -> setDescription($faker->sentence(3)); 
         $manager->persist($motif);
+        $motifs[] = $motif;
         }
         // Nous gerons les Zone:
          $zones = [];
@@ -191,12 +198,13 @@ class AppFixtures extends Fixture
              ->setCommentaire($faker->paragraph(2)) 
              ->setPrix(mt_rand(40, 200)) 
              ->setClientSatisfat($faker->boolean()) 
-             ->setSignature($faker->sentence()) 
+             ->setDateCreation($faker->word) 
              ->setAuthor($user)
              ->setRdvPrestation($prestation)
              ->setRdvMotif($motif)
              ->setRdvZone($zone)
              ->setRdvLigne($ligne)
+             ->setPrestataire($prestataire)
              ->setRdvEqipment($equipement)
              ->setRdvStatus($statut)
              ->setCustomer($client);

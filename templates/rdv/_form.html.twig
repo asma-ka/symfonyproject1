@@ -1,5 +1,5 @@
-
-{{ form_start(form) }}
+{# 
+{{ form_start(form) }} #}
 
 <div class="row">
       <div class="col-12">
@@ -62,7 +62,7 @@
   <li><a href="#" class="tablinks" onclick="openCity(event, 'errach')">Données lignes</a></li>
 </ul>
 
-<div id="London" class="tabcontent" >
+<div id="London" class="tabcontent " >
 <div class="row">
       <div class="col-12">
             <div class="card">
@@ -74,56 +74,272 @@
       
   <button class="button" disabled="disabled" >Génerale</button>
   
-  <table class="editrdvform" style="width:100%;"> 
-  <tr>
-    <th>{{ form_row(form.numeroRdv)}}</th>
-  </tr>
-  <tr>
-    <th>{{ form_row(form.rdvLigne)}}</th>
-    
-  </tr>
-  <tr>
-    <th>{{ form_row(form.rdvEqipment)}}</th>
-    
-  </tr>
-  <tr>
-    <th>{{ form_row(form.rdvPrestation)}}</th>
-    
-  </tr>
+  <form method="" class="icons-tab-steps wizard-circle">
+
+                                          <section id="icon-tabs">
+                    
+                                       
+                                        <form method="" class="icons-tab-steps wizard-circle">
+
+                                            <!-- Step 1 -->
+                                            
+                                                       
+                                                            <label for="firstName11">Crée par : </label>
+                                                            <input  type="text" class="form-control" value="{{app.user.nom}}  {{app.user.prenom}}" name='crpar' id="name">
+                                                      
+                                                            <label for="lastName11">Statut :</label>
+
+
+                                                            <input type="text" class="form-control" name='statut' id="fname">
+                                                        
+                                                 
+
+                                                            <label for="emailAddress11">Date de création </label>
+                                                             <input type="text" class="form-control"  value ={{ 'now'|date('d-m-y') }} name ='dtcria' id="typid"> 
+                                                            {#<input type="text" value="<?php echo date('Y-m-d'); ?>"> <br>#}
+                                                    
+                                                  
+                                                            <label for="location11">Prestataire</label>
+                                                             <input type="text" class="form-control" name ='prista' id="numid">
+                                                        
+                                        </form>
+    </section>                       
+</div>
+</div>
+</div>
+</div>
+</div>
   
-  <tr>
-    <th>{{ form_row(form.rdvStatus)}}</th>
-    
-  </tr>
-
-</table>
-  </div> 
 </div>
-</div>
-</div>
-</div>
-</div>
-
-
 
 
 
 <div id="Paris" class="tabcontent">
-  <h3>Equipements</h3>
+  <div class="row">
+      <div class="col-12">
+            <div class="card">
+               <div class="card-header">
+        
+              </div>
+           <div class="card-content">
+      <div class="card-body">
+      
+    <button class="button" disabled="disabled" >Données équipements</button>
+   <section id="icon-tabs">
+                    
+                                       
+                                        <form method="" class="icons-tab-steps wizard-circle">
+
+                                            <!-- Step 1 -->
+                                            
+                                                       
+                                                            <label for="firstName11">Adresse Mac: </label>
+                                                            <input  type="text" class="form-control" name='nom' id="name">
+                                                      
+                                                            <label for="lastName11">Numero de Série:</label>
+                                                            <input type="text" class="form-control" name='prenom' id="fname">
+                                                        
+                                                 
+
+                                                            <label for="emailAddress11">Garantie client</label>
+                                                            <input type="text" class="form-control"  name ='garcli' id="typid">
+                                                        
+                                                    
+                                                  
+                                                            <label for="location11">Date début garantie</label>
+                                                             <input type="text" class="form-control" name ='datDG' id="numid">
+                                                        
+                                                  
+                              
+                                                            <label for="jobtitle11">Type d'équipements :</label>
+                                                            <input type="text" class="form-control"  name =tpeqip' id="adessid">
+                                                        
+                                            
+                                            
+               
+                                           
+                                        </form>
+    </section>                       
+</div>
+</div>
+</div>
+</div>
+</div>
   
 </div>
+<!-- Step 2 -->
 
 <div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
+  <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+        
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                       
+<button class="button" disabled="disabled" >Données clients</button>
+   <section id="icon-tabs">
+                    
+                                       
+                                        <form method="post" class="icons-tab-steps wizard-circle">
+
+                                            <!-- Step 1 -->
+                                            
+                                                <div class="row">
+                                                   <div class="col-12">
+                                                       
+                                                            <label for="firstName11">Numero Ligne: </label>
+                                                            <input  type="text" class="form-control" name='numligne' id="name">
+                                                      
+                                                            <label for="lastName11">Type de ligne:</label>
+                                                            <input type="text" class="form-control" name='tpligne' id="fname">
+                                                        
+                                                 
+
+                                                            <label for="emailAddress11">Plan tarifaire :</label>
+                                                            <input type="text" class="form-control"  name ='plantari' id="typid">
+                                                        
+                                                    
+                                                  
+                                                            <label for="location11">Durée d'engagement :</label>
+                                                             <input type="text" class="form-control" name ='drengagment' id="numid">
+                                                        
+                                                  
+                                            
+
+                                            <!-- Step 2 -->
+                                            
+                                                            <label for="proposalTitle11">Numero Contrat</label>
+                                                            <input type="text" class="form-control"   name ='numcontclient' id="numcon">
+                                                        
+                                                        
+                                                        
+                                                   
+                                                    
+                                                            <label for="jobtitle11">adress</label>
+                                                            <input type="text" class="form-control"  name ='adresnclient' id="adessid">
+                                                        
+                                                            
+                                             
+                                           
+                                        </form>
+                        
+</section>
   </div>
+           </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
   <div id="kech" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
+  <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+        
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+ <button class="button" disabled="disabled" >Données prestation</button>
+   <section id="icon-tabs">
+                    
+                                       
+                                        <form method="post" class="icons-tab-steps wizard-circle">
+
+                                            <!-- Step 1 -->
+                                            
+                                                <div class="row">
+                                                   <div class="col-12">
+                                                       
+                                                            <label for="firstName11">Degré d'urgence : </label>
+                                                            <input  type="text" class="form-control" name='dgrirgc' id="name">
+                                                      
+                                                            <label for="lastName11">Type de prestation :</label>
+                                                            <input type="text" class="form-control" name='tpstation' id="fname">
+                                                        
+                                                 
+
+                                            
+
+                                           
+                                        </form>
+                       
+</section>
+             </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
   </div>
   <div id="errach" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
+  <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+        
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+  <button class="button" disabled="disabled" >Données lignes</button>
+   <section id="icon-tabs">
+                    
+                                       
+                                        <form method="post" class="icons-tab-steps wizard-circle">
+
+                                            <!-- Step 1 -->
+                                            
+                                                <div class="row">
+                                                   <div class="col-12">
+                                                       
+                                                            <label for="firstName11">nom: </label>
+                                                            <input  type="text" class="form-control" name='nom' id="name">
+                                                      
+                                                            <label for="lastName11">prenom:</label>
+                                                            <input type="text" class="form-control" name='prenom' id="fname">
+                                                        
+                                                 
+
+                                                            <label for="emailAddress11">type d'identification</label>
+                                                            <input type="text" class="form-control"  name ='typeIdenti' id="typid">
+                                                        
+                                                    
+                                                  
+                                                            <label for="location11">NumeroIdentification</label>
+                                                             <input type="text" class="form-control" name ='numid' id="numid">
+                                                        
+                                                  
+                                            
+
+                                            <!-- Step 2 -->
+                                            
+                                                            <label for="proposalTitle11">NumeroContrat</label>
+                                                            <input type="text" class="form-control"   name ='numcont' id="numcon">
+                                                        
+                                                        
+                                                        
+                                                   
+                                                    
+                                                            <label for="jobtitle11">adress</label>
+                                                            <input type="text" class="form-control"  name ='adresnam' id="adessid">
+                                                        
+                                                            <label for="shortDescription11">cordonnee :</label>
+                                                            <textarea name="cordonnee"   id="corid" rows="1.5" class="form-control"></textarea>
+                                                        
+                                                        
+                                                    </div>
+                                                </div>
+                                            
+               
+                                           
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</section>
 </div>
 
 
@@ -143,4 +359,4 @@
             {{ button_label|default('Save') }}</button>
      </div>
             </div>      
-{{ form_end(form) }}
+{# {{ form_end(form) }} #}

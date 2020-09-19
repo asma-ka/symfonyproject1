@@ -49,19 +49,21 @@ class Prestataire
      */
     private $prtaireCompc;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Prestation::class, mappedBy="prstionPrstaire")
-     */
-    private $prestations;
-
+   
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="prestataire")
+     */
+    private $rdvs;
+
     public function __construct()
     {
         $this->prestations = new ArrayCollection();
+        $this->rdvs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -184,6 +186,37 @@ class Prestataire
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvs(): Collection
+    {
+        return $this->rdvs;
+    }
+
+    public function addRdv(Rdv $rdv): self
+    {
+        if (!$this->rdvs->contains($rdv)) {
+            $this->rdvs[] = $rdv;
+            $rdv->setPrestataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdv(Rdv $rdv): self
+    {
+        if ($this->rdvs->contains($rdv)) {
+            $this->rdvs->removeElement($rdv);
+            // set the owning side to null (unless already changed)
+            if ($rdv->getPrestataire() === $this) {
+                $rdv->setPrestataire(null);
+            }
+        }
 
         return $this;
     }

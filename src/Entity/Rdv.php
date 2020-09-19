@@ -45,7 +45,7 @@ class Rdv
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $signature;
+    private $dateCreation;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="rdvs")
@@ -86,6 +86,11 @@ class Rdv
      * @ORM\ManyToOne(targetEntity=Zone::class, inversedBy="rdvs")
      */
     private $rdvZone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="rdvs")
+     */
+    private $prestataire;
 
    
 
@@ -157,14 +162,14 @@ class Rdv
         return $this;
     }
 
-    public function getSignature(): ?string
+    public function getDateCreation(): ?string
     {
-        return $this->signature;
+        return $this->dateCreation;
     }
 
-    public function setSignature(string $signature): self
+    public function setDateCreation(string $dateCreation): self
     {
-        $this->signature = $signature;
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
@@ -261,6 +266,18 @@ class Rdv
     public function setRdvZone(?Zone $rdvZone): self
     {
         $this->rdvZone = $rdvZone;
+
+        return $this;
+    }
+
+    public function getPrestataire(): ?Prestataire
+    {
+        return $this->prestataire;
+    }
+
+    public function setPrestataire(?Prestataire $prestataire): self
+    {
+        $this->prestataire = $prestataire;
 
         return $this;
     }
