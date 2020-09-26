@@ -3,25 +3,26 @@
 namespace App\Controller;
 
 use App\Entity\Rdv;
+use App\Entity\Zone;
+use App\Entity\Motif;
 use App\Form\RdvType;
 use App\Entity\Client;
 use App\Entity\TypeLigne;
 use App\Entity\Prestataire;
 use App\Entity\TypeEquipment;
 use App\Entity\TypePrestation;
+use App\DBAL\Types\RdvStatuType;
 use App\Repository\RdvRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * @Route("/rdv")
- */
+
 class RdvController extends AbstractController
 {
     /**
-     * @Route("/", name="rdv_index", methods={"GET"})
+     * @Route("/rdv", name="rdv_index", methods={"GET"})
      */
     public function index(RdvRepository $rdvRepository): Response
     {
@@ -31,31 +32,36 @@ class RdvController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="rdv_new", methods={"GET","POST"})
+     * @Route("rdv/new", name="rdv_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function newRdv(Request $request): Response
     {
         
         //$form = $this->createForm(RdvType::class, $rdv);
         //$form->handleRequest($request);
         $clients = $this->getDoctrine()->getRepository(Client::class)->findAll();
+        $motifs = $this->getDoctrine()->getRepository(Motif::class)->findAll();
+        $zones = $this->getDoctrine()->getRepository(Zone::class)->findAll();
         $prestataires = $this->getDoctrine()->getRepository(Prestataire::class)->findAll();
          $tpequits = $this->getDoctrine()->getRepository(TypeEquipment::class)->findAll();
          $tpprestations = $this->getDoctrine()->getRepository(TypePrestation::class)->findAll();
          $tplignes = $this->getDoctrine()->getRepository(TypeLigne::class)->findAll();
-        
+        $lastRdv=$this->getDoctrine()->getRepository(Rdv::class)->findOneBy([],["id"=>"desc"]);
+        $numRdv=$lastRdv->getNumeroRdv()+1;
          if ($request->getMethod() == "POST"){
+            
             $entityManager = $this->getDoctrine()->getManager();
             $rdv = new Rdv();
-            // $rdv->setNumeroContrat($request->get('numcont'));
-            // $rdv->setAdress($request->get('adresnam'));
-            // $client->setCordonees($request->get('cordonnee'));
-      
-           // $rdv->setAuthor($request->get('nuser'));
-            // $prestataire= $this->getDoctrine()->getRepository(Prestataire::class)->find($request->request->get('prestaire'));
-            // $rdv->setPrestataire($prestataire);
-            
-            
+            $rdv->setRdvStatus(RdvStatuType::CREE);
+            $rdv->setnumeroRdv($numRdv);
+     $motif= $this->getDoctrine()->getRepository(Motif::class)->find($request->request->get('motif'));
+     $zone= $this->getDoctrine()->getRepository(Zone::class)->find($request->request->get('zone'));
+     $client= $this->getDoctrine()->getRepository(Client::class)->find($request->request->get('client'));
+     $tpLigne= $this->getDoctrine()->getRepository(TypeLigne::class)->find($request->request->get('tpligne'));
+     $tpEqipement= $this->getDoctrine()->getRepository(TypeEquipment::class)->find($request->request->get('tpequipment'));
+     $tpPrestation= $this->getDoctrine()->getRepository(TypePrestation::class)->find($request->request->get('tpprestation'));
+     $rdv->setCommentaire($request->get('commentaire'));
+     $rdv->setNumeroRdv($request->get('nmrdv'));      
       
 
             $entityManager->persist($rdv);
@@ -67,7 +73,9 @@ class RdvController extends AbstractController
         }
 
         return $this->render('rdv/new.html.twig' ,[
-            //   'rdv' => $rdv,
+            'numRdv' => $numRdv,
+            'motifs' =>$motifs,
+             'zones' => $zones,
               'clients' => $clients,
               'tpequits'=>$tpequits,
               'tplignes' => $tplignes,
@@ -78,7 +86,7 @@ class RdvController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="rdv_show", methods={"GET"})
+     * @Route("rdv/{id}", name="rdv_show", methods={"GET"})
      */
     public function show(Rdv $rdv): Response
     {
@@ -88,7 +96,7 @@ class RdvController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="rdv_edit", methods={"GET","POST"})
+     * @Route("rdv/{id}/edit", name="rdv_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Rdv $rdv): Response
     {
@@ -117,7 +125,7 @@ class RdvController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="rdv_delete", methods={"DELETE"})
+     * @Route("rdv/{id}", name="rdv_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Rdv $rdv): Response
     {

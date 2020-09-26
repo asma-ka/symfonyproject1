@@ -8,13 +8,13 @@
                 <div class="card-body">
                         <form method="post" class="icons-tab-steps wizard-circle">
                             <label for="firstName11 ">numero de Rendez vous : </label>
-                            <input  type="text "  valeur= "" class="form-control " name='nmrdv' id="name ">
+                            <input  type="text "  value="{{numRdv}}"  class="form-control " name='nmrdv' id="name ">
 
                              <label for="firstName11">Crée par : </label>
                              <input type="text" name="nuser" class="form-control" value="{{app.user.nom}}  {{app.user.prenom}}" name='crpar' id="name">
 
-                             {# <label for="lastName11">Statut :</label>
-                             <input type="text" class="form-control" name='statut' id="fname"> #}
+                              <label for="lastName11">Statut :</label>
+                             <input type="text" class="form-control" value="{{ 'cree'|readable_enum('RdvStatuType') }}" name='statut' id="fname"> 
 
 
 
@@ -22,9 +22,28 @@
                             <input type="text"  name="dtcreation" class="form-control" value={{ 'now'|date( 'd-m-y') }} name='dtcria' id="typid">#}  
                              <label for="location11">client</label>
                                <fieldset class="form-group">
-                                      <select class="form-control" name="client" id="basicSelect>
+                                      <select class="form-control" name="client"  id="basicSelect">
+                                          <option   value="" > selectionee un client </option>
                                                {% for client in clients %}
                                                      <option   value=" {{client.id}} ">{{client.nom}}  {{client.prenom}}</option>
+                                </fieldset>
+                                                               
+                                  {% endfor %}                           
+                                     </select>
+                                     <label for="location11">client</label>
+                               <fieldset class="form-group">
+                                      <select class="form-control" name="motif" id="basicSelect">
+                                               {% for motif in motifs %}
+                                                     <option   value=" {{motif.id}} ">{{motif.libelle}}  </option>
+                                </fieldset>
+                                                               
+                                  {% endfor %}                           
+                                     </select>
+                                     <label for="location11">zone</label>
+                               <fieldset class="form-group">
+                                      <select class="form-control" name="zone" id="basicSelect">
+                                               {% for zone in zones %}
+                                                     <option   value=" {{zone.id}} ">{{zone.libelle}}  </option>
                                 </fieldset>
                                                                
                                   {% endfor %}                           
@@ -43,10 +62,10 @@
                               
                             <label for="jobtitle11 ">Type d'équipements :</label>
                                 <fieldset class="form-group ">
-                                    <select class="form-control " id="basicSelect> 
+                                    <select class="form-control " id="basicSelect" name="tpequipment"> 
                                           {% for tpequit in tpequits %}
 
-                                                <option name="tpequipment" value="{{tpequit.id}}">{{tpequit.libelle}}</option>
+                                                <option  value="{{tpequit.id}}">{{tpequit.libelle}}</option>
                                 </fieldset>
 
                                            {% endfor %}
@@ -56,22 +75,20 @@
 
                             <label for="lastName11">Type de ligne:</label>
                                <fieldset class="form-group">
-                                    <select class="form-control" id="basicSelect>
+                                    <select class="form-control" id="basicSelect" name="tpligne">
                                         {% for tpligne in tplignes %}
                                                                 
-                                            <option  name="tpligne" value=" {{tpligne.id}} " > {{tpligne.libelle}} </option>
+                                            <option   value=" {{tpligne.id}} " > {{tpligne.libelle}} </option>
                                  </fieldset>
                                                                
                                         {% endfor %} 
                                     </select>
                             
                               
-                            <label for="firstName11 ">Commentaire : </label>
-                            <input  type="text " class="form-control " name='commentaire' id="cmt ">
-                                                      
+                           
                             <label for="lastName11 ">Type de prestation :</label>
                                     <fieldset class="form-group ">
-                                        <select class="form-control " id="basicSelect> 
+                                        <select class="form-control " id="basicSelect" name ="tpprestation"> 
                                             {% for tpprestation in tpprestations %}
                                                 <option  name ="tpprestation" value="{{tpprestation.id}}">{{tpprestation.libelle}}</option>
                                     </fieldset>
@@ -79,10 +96,10 @@
                                         {% endfor %}
                                     </select>
                                                 
-
-                           <label for="shortDescription11"> Commentaire :</label>
-                            <textarea name="commentaire" id="corid" rows="1.5" class="form-control"></textarea>
-
+                             <label for="firstName11 ">Commentaire : </label>
+                            <input  type="text " class="form-control " name='commentaire' id="cmt ">
+                                                      
+                         
                                             
                   
 

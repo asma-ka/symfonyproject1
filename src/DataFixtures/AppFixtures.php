@@ -19,6 +19,7 @@ use App\Entity\Prestataire;
 use App\Entity\DugreUrgence;
 use App\Entity\TypeEquipment;
 use App\Entity\TypePrestation;
+use App\DBAL\Types\RdvStatuType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -167,17 +168,17 @@ class AppFixtures extends Fixture
                     $clients[] =  $client;  
                 }
     // Nous gerons les Statut:
-       $statuts= [];
-       for ($i = 1; $i <= 3
-       ; $i++) {
+    //    $statuts= [];
+    //    for ($i = 1; $i <= 3
+    //    ; $i++) {
            
-        $statut = new Statut();
-           $statut  -> setLibelle($faker->word)
-                    -> setOrdre($faker->word)
-                    -> setDescription($faker->sentence(3));
-         $manager->persist($statut);
-         $statuts[] = $statut;
-       }
+    //     $statut = new Statut();
+    //        $statut  -> setLibelle($faker->word)
+    //         $statut        -> setOrdre($faker->word)
+    //         $statut        -> setDescription($faker->sentence(3));
+    //      $manager->persist($statut);
+    //      $statuts[] = $statut;
+    //    }
        // Nous gerons les motif:
         $motifs= [];
         for ($i = 1; $i <= 9; $i++) {
@@ -234,11 +235,11 @@ class AppFixtures extends Fixture
          $client = $clients[mt_rand(0, count($clients) - 1)];
          $ligne = $lignes[mt_rand(0, count($lignes) - 1)];
          $rdv->setNumeroRdv(mt_rand(11, 20))
-            // ->setResultat($faker->sentence())
+            // $rdv->setResultat($faker->sentence())
              ->setCommentaire($faker->paragraph(2)) 
              ->setPrix(mt_rand(40, 200)) 
-             //->setClientSatisfat($faker->boolean()) 
-             ->setDateCreation($faker->word) 
+             //$rdv->setClientSatisfat($faker->boolean()) 
+             //$rdv->setDateCreation($faker->word) 
              ->setAuthor($user)
              ->setRdvPrestation($prestation)
              ->setRdvMotif($motif)
@@ -246,7 +247,7 @@ class AppFixtures extends Fixture
              ->setRdvLigne($ligne)
              ->setPrestataire($prestataire)
              ->setRdvEqipment($equipement)
-             ->setRdvStatus($statut)
+             ->setRdvStatus(RdvStatuType::getRandomValue())
              ->setCustomer($client);
             
 

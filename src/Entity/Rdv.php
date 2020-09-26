@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Entity;
-
+use App\DBAL\Types\RdvStatuType;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use App\Repository\RdvRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,7 +19,7 @@ class Rdv
     private $id;
 
     /**
-     * @ORM\GeneratedValue()
+     * 
      * @ORM\Column(type="integer")
      */
     private $numeroRdv;
@@ -31,14 +32,14 @@ class Rdv
     private $commentaire;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",nullable=true)
      */
     private $prix;
 
    
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime_immutable", length=255)
      */
     private $dateCreation;
 
@@ -68,7 +69,8 @@ class Rdv
     private $customer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Statut::class, inversedBy="rdvs")
+     * @ORM\Column(name="rdv_status", type="string", length=255)
+     * @DoctrineAssert\Enum(entity="\App\DBAL\Types\RdvStatuType")
      */
     private $rdvStatus;
 
@@ -88,7 +90,10 @@ class Rdv
     private $prestataire;
 
    
+  public function __construct(){
+      $this->dateCreation=new \DateTimeImmutable();
 
+  }
   
 
     public function getId(): ?int
@@ -134,12 +139,12 @@ class Rdv
         return $this;
     }
     
-    public function getDateCreation(): ?string
+    public function getDateCreation():? \DateTimeInterface
     {
         return $this->dateCreation;
     }
 
-    public function setDateCreation(string $dateCreation): self
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
 
@@ -206,12 +211,12 @@ class Rdv
         return $this;
     }
 
-    public function getRdvStatus(): ?Statut
+    public function getRdvStatus(): ?string
     {
         return $this->rdvStatus;
     }
 
-    public function setRdvStatus(?Statut $rdvStatus): self
+    public function setRdvStatus(?string $rdvStatus): self
     {
         $this->rdvStatus = $rdvStatus;
 
