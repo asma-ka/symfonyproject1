@@ -17,10 +17,10 @@
             <tr>
               {#  <th>Id</th> #}
                 <th>NumeroRdv</th>
-                <th>Resultat</th>
+                {# <th>Resultat</th> #}
                 <th>Commentaire</th>
                 <th>Prix</th>
-                <th>ClientSatisfat</th>
+                {# <th>ClientSatisfat</th> #}
                 {#<th>Signature</th>#}
                 <th>actions</th>
             </tr>
@@ -30,10 +30,10 @@
             <tr>
               {#}  <td>{{ rdv.id }}</td>#}
                 <td>{{ rdv.numeroRdv }}</td>
-                <td>{{ rdv.resultat }}</td>
+                {# <td>{{ rdv.resultat }}</td> #}
                 <td>{{ rdv.commentaire }}</td>
                 <td>{{ rdv.prix }}</td>
-                <td>{{ rdv.clientSatisfat ? 'Yes' : 'No' }}</td>
+                {# <td>{{ rdv.clientSatisfat ? 'Yes' : 'No' }}</td> #}
              {#}   <td>{{ rdv.signature }}</td>#}
                 <td>
                     <a href="{{ path('rdv_show', {'id': rdv.id}) }}">show</a>

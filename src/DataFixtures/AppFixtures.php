@@ -11,11 +11,14 @@ use App\Entity\Ligne;
 use App\Entity\Motif;
 use App\Entity\Client;
 use App\Entity\Statut;
+use App\Entity\TypeLigne;
 use App\Entity\Competence;
 use App\Entity\Equipement;
 use App\Entity\Prestation;
 use App\Entity\Prestataire;
 use App\Entity\DugreUrgence;
+use App\Entity\TypeEquipment;
+use App\Entity\TypePrestation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -76,6 +79,18 @@ class AppFixtures extends Fixture
         //                     ->setActif($faker->boolean());
         // $manager->persist($dugreUrgence);
         //   }
+         //gerons les types des prestations:
+         $tprestations = [];
+         for ($i = 0; $i < 4; $i++) {
+            
+              $tprestation = new TypePrestation();
+              $tprestation -> setLibelle($faker->word)
+                       -> setDescription($faker->sentence())
+                       // ->setActif($faker->boolean())
+                       -> setOrdre($faker->word);
+            $manager->persist($tprestation);
+            $tprestations[] =  $tprestation; 
+         }
           //gerons les prestation:
           $prestations = [];
           for ($i = 0; $i < 15; $i++) {
@@ -90,6 +105,19 @@ class AppFixtures extends Fixture
          $manager->persist($prestation); 
          $prestations[] =  $prestation;                
           }
+
+            //nous gerons les TypeEquipement:
+            $tpequipments = [];
+            for ($i = 0; $i < 4; $i++) {
+               
+                 $tpequipment = new TypeEquipment();
+                 $tpequipment -> setLibelle($faker->word)
+                          -> setDescription($faker->sentence())
+                          // ->setActif($faker->boolean())
+                          -> setOrdre($faker->word);
+               $manager->persist($tpequipment);
+               $tpequipments[] =  $tpequipment; 
+            }
           //nous gerons les Equipement:
            $equipements = [];
           for ($i = 0; $i < 15; $i++) {
@@ -100,6 +128,18 @@ class AppFixtures extends Fixture
                           ->  setDateDbGartie($faker->dateTime());
         $manager->persist($equipement);    
         $equipements[] =  $equipement;            
+         }
+          //Nous gérons les typeLigne:
+          $tplignes = [];
+         for ($i = 0; $i < 10; $i++) {
+            
+              $tpligne = new TypeLigne();
+              $tpligne -> setLibelle($faker->word)
+                       -> setDescription($faker->sentence())
+                       ->setActif($faker->boolean())
+                       -> setOrdre($faker->word);
+            $manager->persist($tpligne);
+            $tplignes[] =  $tpligne; 
          }
       // Nous gerons les lignes:
         $lignes = [];
@@ -194,10 +234,10 @@ class AppFixtures extends Fixture
          $client = $clients[mt_rand(0, count($clients) - 1)];
          $ligne = $lignes[mt_rand(0, count($lignes) - 1)];
          $rdv->setNumeroRdv(mt_rand(11, 20))
-             ->setResultat($faker->sentence())
+            // ->setResultat($faker->sentence())
              ->setCommentaire($faker->paragraph(2)) 
              ->setPrix(mt_rand(40, 200)) 
-             ->setClientSatisfat($faker->boolean()) 
+             //->setClientSatisfat($faker->boolean()) 
              ->setDateCreation($faker->word) 
              ->setAuthor($user)
              ->setRdvPrestation($prestation)

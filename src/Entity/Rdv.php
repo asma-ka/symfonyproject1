@@ -18,14 +18,12 @@ class Rdv
     private $id;
 
     /**
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $numeroRdv;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $resultat;
+    
 
     /**
      * @ORM\Column(type="text")
@@ -37,10 +35,7 @@ class Rdv
      */
     private $prix;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $clientSatisfat;
+   
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -113,17 +108,7 @@ class Rdv
         return $this;
     }
 
-    public function getResultat(): ?string
-    {
-        return $this->resultat;
-    }
-
-    public function setResultat(string $resultat): self
-    {
-        $this->resultat = $resultat;
-
-        return $this;
-    }
+    
 
     public function getCommentaire(): ?string
     {
@@ -149,19 +134,6 @@ class Rdv
         return $this;
     }
     
-
-    public function getClientSatisfat(): ?bool
-    {
-        return $this->clientSatisfat;
-    }
-
-    public function setClientSatisfat(bool $clientSatisfat): self
-    {
-        $this->clientSatisfat = $clientSatisfat;
-
-        return $this;
-    }
-
     public function getDateCreation(): ?string
     {
         return $this->dateCreation;
