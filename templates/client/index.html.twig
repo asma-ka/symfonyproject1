@@ -18,10 +18,10 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
-                <th>TpIdentification</th>
-                <th>NumIdentification</th>
+                <th>TpId</th>
+                <th>NumId</th>
                 <th>Adress</th>
-                <th>NumeroContrat</th>
+                <th>NumeroCont</th>
                 {#<th>Dateprivisionnelle</th>#}
                 <th>Cordonees</th>
                 <th>actions</th>
@@ -40,8 +40,9 @@
                {# <td>{{ client.dateprivisionnelle ? client.dateprivisionnelle|date('Y-m-d H:i:s') : '' }}</td>#}
                 <td>{{ client.cordonees }}</td>
                 <td>
-                    <a href="{{ path('client_show', {'id': client.id}) }}"><button type="submit" class="btn btn-primary ">show </button></a> <br>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}"><button type="submit" class="btn btn-primary ">edit</button></a>
+                    <a href="{{ path('client_show', {'id': client.id}) }}"> <button type="submit" class="btn btn-primary float-left" style="margin-top: -5px">afficher</button></a> 
+                    <br>
+                    <a href="{{ path('client_edit', {'id': client.id}) }}"><button type="submit" class="btn btn-primary float-left" style="margin-top: 7px">modifier</button></a>
                 </td>
             </tr>
         {% else %}

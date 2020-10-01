@@ -206,7 +206,7 @@ class Client
         return $this;
     }
 /**
-     * Set cordonnees
+     * Get cordonnees
      *
      * @param string $cordonees
      *

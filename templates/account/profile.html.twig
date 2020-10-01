@@ -2,7 +2,14 @@
 
 {% block title %}Modification du profil{% endblock %}
 
-{% block body %}
+{% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
 
 <div class="container">
     <h1 class="my-5">Modifier votre compte !</h1>
@@ -14,7 +21,7 @@
             <div class="alert alert-light">
                 <h2 class="alert-heading">Informations générales</h2>
                 <hr>
-                <table style="width:10%">
+                <table style="width:100%">
                     <tr>
                        <th>{{ form_row(form.nom) }}</th>
                     </tr>
@@ -36,7 +43,7 @@
             <div class="alert alert-light">
                 <h2 class="alert-heading">Détails</h2>
                 <hr>
-                <table style="width:10%">
+                <table style="width:100%">
                      <th>{{ form_row(form.description) }}</th>
                  </table>
                 
@@ -52,6 +59,8 @@
     </div>
     {{ form_end(form) }}
     
+</div>
+</div>
 </div>
 
 {% endblock %}

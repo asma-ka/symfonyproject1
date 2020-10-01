@@ -16,6 +16,7 @@ use App\Repository\RdvRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -33,6 +34,7 @@ class RdvController extends AbstractController
 
     /**
      * @Route("rdv/new", name="rdv_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function newRdv(Request $request): Response
     {
@@ -87,6 +89,7 @@ class RdvController extends AbstractController
 
     /**
      * @Route("rdv/{id}", name="rdv_show", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function show(Rdv $rdv): Response
     {
@@ -97,35 +100,29 @@ class RdvController extends AbstractController
 
     /**
      * @Route("rdv/{id}/edit", name="rdv_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function edit(Request $request, Rdv $rdv): Response
     {
         $form = $this->createForm(RdvType::class, $rdv);
         $form->handleRequest($request);
-     //$prestataires = $this->getDoctrine()->getRepository(Prestataire::class)->findAll();
-         $tpequits = $this->getDoctrine()->getRepository(TypeEquipment::class)->findAll();
-         $tpprestations = $this->getDoctrine()->getRepository(TypePrestation::class)->findAll();
-         $tplignes = $this->getDoctrine()->getRepository(TypeLigne::class)->findAll();
         
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('rdv_index');
-        }
-
-        return $this->render('rdv/edit.html.twig', [
-            'rdv' => $rdv,
-            'tpequits'=>$tpequits,
-              'tplignes' => $tplignes,
-              'tpprestations' => $tpprestations,
-              'prestataires' => $prestataires,
-            'form' => $form->createView(),
-        ]);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+    
+                return $this->redirectToRoute('rdv_index');
+            }
+    
+            return $this->render('rdv/edit.html.twig', [
+                'rdv' => $rdv,
+                'form' => $form->createView(),
+            ]);
+        
     }
 
     /**
      * @Route("rdv/{id}", name="rdv_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_USER")
      */
     public function delete(Request $request, Rdv $rdv): Response
     {
@@ -137,4 +134,103 @@ class RdvController extends AbstractController
 
         return $this->redirectToRoute('rdv_index');
     }
+
+
+     /**
+     * @Route("/intervention", name="intervention_index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function indexinter(RdvRepository $rdvRepository): Response
+    {
+        return $this->render('intervention/index.html.twig', [
+            'rdvs' => $rdvRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("intervention/new", name="intervention_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function newInter(Request $request): Response
+    {
+        
+        //$form = $this->createForm(RdvType::class, $rdv);
+        //$form->handleRequest($request);
+        $clients = $this->getDoctrine()->getRepository(Client::class)->findAll();
+        $motifs = $this->getDoctrine()->getRepository(Motif::class)->findAll();
+        $zones = $this->getDoctrine()->getRepository(Zone::class)->findAll();
+        $prestataires = $this->getDoctrine()->getRepository(Prestataire::class)->findAll();
+         $tpequits = $this->getDoctrine()->getRepository(TypeEquipment::class)->findAll();
+         $tpprestations = $this->getDoctrine()->getRepository(TypePrestation::class)->findAll();
+         $tplignes = $this->getDoctrine()->getRepository(TypeLigne::class)->findAll();
+        $lastRdv=$this->getDoctrine()->getRepository(Rdv::class)->findOneBy([],["id"=>"desc"]);
+        $numRdv=$lastRdv->getNumeroRdv()+1;
+         if ($request->getMethod() == "POST"){
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $rdv = new Rdv();
+            $rdv->setRdvStatus(RdvStatuType::TRAITEE);
+            $rdv->setnumeroRdv($numRdv);
+    $prestataire= $this->getDoctrine()->getRepository(Prestataire::class)->find($request->request->get('prestaire'));
+     $motif= $this->getDoctrine()->getRepository(Motif::class)->find($request->request->get('motif'));
+     $zone= $this->getDoctrine()->getRepository(Zone::class)->find($request->request->get('zone'));
+     $client= $this->getDoctrine()->getRepository(Client::class)->find($request->request->get('client'));
+     $tpLigne= $this->getDoctrine()->getRepository(TypeLigne::class)->find($request->request->get('tpligne'));
+     $tpEqipement= $this->getDoctrine()->getRepository(TypeEquipment::class)->find($request->request->get('tpequipment'));
+     $tpPrestation= $this->getDoctrine()->getRepository(TypePrestation::class)->find($request->request->get('tpprestation'));
+     $rdv->setCommentaire($request->get('commentaire'));
+     $rdv->setNumeroRdv($request->get('nmrdv'));      
+      
+
+            $entityManager->persist($rdv);
+            $entityManager->flush();
+            
+
+
+            return $this->redirectToRoute('intervention_index');
+        }
+        return $this->render('intervention/new.html.twig' ,[
+            'numRdv' => $numRdv,
+            'motifs' =>$motifs,
+             'zones' => $zones,
+              'clients' => $clients,
+              'tpequits'=>$tpequits,
+              'tplignes' => $tplignes,
+              'tpprestations' => $tpprestations,
+              'prestataires' => $prestataires,
+              //'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("intervention/{id}", name="intervention_show", methods={"GET"})
+     */
+    public function showInter(Rdv $rdv): Response
+    {
+        return $this->render('intervention/show.html.twig', [
+            'rdv' => $rdv,
+        ]);
+    }
+    /**
+     * @Route("intervention/{id}/edit", name="intervention_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function editinter(Request $request, Rdv $rdv): Response
+    {
+        $form = $this->createForm(RdvType::class, $rdv);
+        $form->handleRequest($request);
+        
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+    
+                return $this->redirectToRoute('intervention_index');
+            }
+    
+            return $this->render('intervention/edit.html.twig', [
+                'rdv' => $rdv,
+                'form' => $form->createView(),
+            ]);
+        
+    }
+
+
 }
