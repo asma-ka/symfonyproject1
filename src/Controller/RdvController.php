@@ -7,6 +7,8 @@ use App\Entity\Zone;
 use App\Entity\Motif;
 use App\Form\RdvType;
 use App\Entity\Client;
+use App\Entity\Search;
+use App\Form\SearchType;
 use App\Entity\TypeLigne;
 use App\Entity\Prestataire;
 use App\Entity\TypeEquipment;
@@ -25,11 +27,39 @@ class RdvController extends AbstractController
     /**
      * @Route("/rdv", name="rdv_index", methods={"GET"})
      */
-    public function index(RdvRepository $rdvRepository): Response
+    public function index(RdvRepository $rdvRepository ,Request $request): Response
     {
-        return $this->render('rdv/index.html.twig', [
-            'rdvs' => $rdvRepository->findAll(),
-        ]);
+        
+            $search = new Search();
+            $form = $this->createForm(SearchType::class,$search);
+            $form->handleRequest($request);
+            //initialement le tableau des articles est vide,
+            //c.a.d on affiche les articles que lorsque l'utilisateur
+            //clique sur le bouton rechercher
+            $rdvs= [];
+           
+            if($form->isSubmitted() && $form->isValid()) {
+            
+            //$prestataire = $search->getPrestataire();
+            $numeroRdv = $search->getNumeroRdv();
+            if ($numeroRdv!=""  )
+           
+            $rdvs= $this->getDoctrine()->getRepository(Rdv::class)
+             ->findBy(['numeroRdv' => $numeroRdv]);
+            else
+            
+            $rdvs= $this->getDoctrine()->getRepository(Rdv::class)
+            ->findAll();
+            }
+            return $this->render('rdv/index.html.twig',[ 
+                'form' =>$form->createView(),
+                'rdvs' => $rdvs
+
+            ]);
+        // ******
+        // return $this->render('rdv/index.html.twig', [
+        //     'rdvs' => $rdvRepository->findAll(),
+        // ]);
     }
 
     /**
@@ -38,7 +68,6 @@ class RdvController extends AbstractController
      */
     public function newRdv(Request $request): Response
     {
-        
         //$form = $this->createForm(RdvType::class, $rdv);
         //$form->handleRequest($request);
         $clients = $this->getDoctrine()->getRepository(Client::class)->findAll();
