@@ -57,7 +57,8 @@ class Client
     private $cordonees;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="customer")
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="customer",cascade={"persist", "remove"})
+
      */
     private $rdvs;
 

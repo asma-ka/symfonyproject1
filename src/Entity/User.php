@@ -74,15 +74,20 @@ class User implements UserInterface
      */
     private $rdvs;
 
+    // /**
+    //  * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="users")
+    //  */
+    // private $userRoles;
+
     /**
-     * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="users")
+     * @ORM\Column(type="json")
      */
-    private $userRoles;
+    private $roles = [];
 
     public function __construct()
     {
         $this->rdvs = new ArrayCollection();
-        $this->userRoles = new ArrayCollection();
+        //$this->userRoles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,18 +203,24 @@ class User implements UserInterface
 
         return $this;
     }
-    public function getRoles() {
-
-        $roles = $this->userRoles->map(function($role){
-            return $role->getTitle();
-        })->toArray();
-
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return $roles;
-
-        
+        return array_unique($roles);
     }
+public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
 
     public function getPassword() {
         return $this->hash;
@@ -223,31 +234,38 @@ class User implements UserInterface
 
     public function eraseCredentials() {}
 
-    /**
-     * @return Collection|Role[]
-     */
-    public function getUserRoles(): Collection
-    {
-        return $this->userRoles;
-    }
+    // /**
+    //  * @return Collection|Role[]
+    //  */
+    // public function getUserRoles(): Collection
+    // {
+    //     return $this->userRoles;
+    // }
 
-    public function addUserRole(Role $userRole): self
-    {
-        if (!$this->userRoles->contains($userRole)) {
-            $this->userRoles[] = $userRole;
-            $userRole->addUser($this);
-        }
+    // public function addUserRole(Role $userRole): self
+    // {
+    //     if (!$this->userRoles->contains($userRole)) {
+    //         $this->userRoles[] = $userRole;
+    //         $userRole->addUser($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeUserRole(Role $userRole): self
-    {
-        if ($this->userRoles->contains($userRole)) {
-            $this->userRoles->removeElement($userRole);
-            $userRole->removeUser($this);
-        }
+    // public function removeUserRole(Role $userRole): self
+    // {
+    //     if ($this->userRoles->contains($userRole)) {
+    //         $this->userRoles->removeElement($userRole);
+    //         $userRole->removeUser($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
+
+    // public function setRoles(array $roles): self
+    // {
+    //     $this->roles = $roles;
+
+    //     return $this;
+    // }
 }

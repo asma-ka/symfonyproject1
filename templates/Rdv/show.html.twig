@@ -3,6 +3,13 @@
 {% block title %}Rdv{% endblock %}
 
 {% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body"style="margin-top: -20px">
     <h1>Rdv</h1>
 
     <table class="table">
@@ -15,10 +22,10 @@
                 <th>NumeroRdv</th>
                 <td>{{ rdv.numeroRdv }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>Resultat</th>
                 <td>{{ rdv.resultat }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>Commentaire</th>
                 <td>{{ rdv.commentaire }}</td>
@@ -27,20 +34,20 @@
                 <th>Prix</th>
                 <td>{{ rdv.prix }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>ClientSatisfat</th>
                 <td>{{ rdv.clientSatisfat ? 'Yes' : 'No' }}</td>
-            </tr>
+            </tr> #}
            {#} <tr>
                 <th>Signature</th>
-                <td>{{ rdv.signature }}</td>
+                <td>{{ rdv.resultat }}</td>
             </tr>#}
         </tbody>
     </table>
 
-    <a href="{{ path('rdv_index') }}">back to list</a>
+    <button type="button" class="btn btn-secondary float-right " style="margin-top: 7px"><a href="{{ path('rdv_index') }}">Retour</a></button>
 
-    {<a href="{{ path('rdv_edit', {'id': rdv.id}) }}">edit</a> 
-
+   {#} <button type="button" class="btn btn-secondary float-right " style="margin-top: 10px"><a href="{{ path('rdv_edit', {'id': rdv.id}) }}">Modifier</a> </button> #}
+    {# <a href="{{ path('rdv_affecter', {'id': rdv.id}) }}">Affecter Prestataire</a> #}
     {{ include('rdv/_delete_form.html.twig') }}
 {% endblock %}

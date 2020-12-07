@@ -1,0 +1,95 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}affectation{% endblock %}
+
+{% block content %}
+<div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body"style="margin-top: -20px">
+
+            <div class="content-body">
+                <!-- Simple Validation start -->
+                <section class="simple-validation">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4  align="center"><u>    affecter un prestataire:   </u> </h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                       
+                                        <form class="form-horizontal" novalidate  method='post'>
+                                            <div class="row">
+                                                <div class="col-sm-10">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                          <label>  <h5> Prestataire : </h5> </label> 
+                                                        <select class="form-control" name="prestataire"    id="basicSelect">
+                                                   <option   value="" > selectionee un prestatire </option>
+                                                              {% for prestataire in prestataires %}
+                                                     <option    value=" {{prestataire.id}} ">{{prestataire.nom}}  {{prestataire.prenom}}</option>
+                                                         {% endfor %}
+                                                         </select>
+                                                     </div>
+                                                </div>
+                                                </div>
+                                <button type="submit" class="btn btn-primary float-right"  style="margin-top: 120px"> 
+                                   {{ button_label|default('valider') }}</button>
+                                                            
+                                           
+                                                
+                                                </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+{%   endblock  %}
+{# <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body"style="margin-top: -20px">
+    <h1>Affecter un prestataire</h1> 
+
+<div class=col-md-1 colonne-centree></div>
+    <form method='post'>
+    <p text-align: center>
+    <label>  <h4> prestataire : </h4> </label> 
+
+    
+
+ <select class="form-control" name="prestataire"    id="basicSelect">
+                      <option   value="" > selectionee un prestatire </option>
+                             {% for prestataire in prestataires %}
+                                <option    value=" {{prestataire.id}} ">{{prestataire.nom}}  {{prestataire.prenom}}</option>
+                             {% endfor %}
+ </select>
+ 
+ <button type="submit" class="btn btn-primary float-right"> #}
+                 {# {{ button_label|default('valider') }}</button> #}
+                {# </div>
+                                 </div>
+                                 </p>
+                                
+                                 </form>
+         
+                                                           
+  </div>                                #}
+                                 {# {% endblock %} #}

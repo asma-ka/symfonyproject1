@@ -38,6 +38,9 @@
     <link rel="stylesheet" type="text/css" href="/css/pages/dashboard-analytics.css">
     <link rel="stylesheet" type="text/css" href="/css/pages/card-analytics.css">
     <link rel="stylesheet" type="text/css" href="/css/plugins/tour/tour.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" 
+    integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -121,10 +124,11 @@
                         </li>
                             {% if app.user %}
                              
-                            {% endif %} 
+                            
                             <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{app.user.nom}}  {{app.user.prenom}}</span></div><span><img class="round" <img src="{{app.user.picture}}" alt="avatar" height="40" width="40"></span>
                             </a>
+                            {% endif %} 
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="{{ path('account_profile') }}"><i class="feather icon-user"></i> Editer Profil</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ path('account_login') }}"><i class="feather icon-power"></i> déconnexion</a>
                             </div>
@@ -335,6 +339,8 @@
     <script src="/js/core/app-menu.js"></script>
     <script src="/js/core/app.js"></script>
     <script src="/js/scripts/components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" 
+    integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
     <!-- END: Theme JS-->
  <script src="https://getbootstrap.com/docs/4.4/getting-started/introduction/#js "></script>
     <!-- BEGIN: Page JS-->

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Entity;
+use DateTimeImmutable;
 use App\DBAL\Types\RdvStatuType;
-use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
-use App\Repository\RdvRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RdvRepository;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * @ORM\Entity(repositoryClass=RdvRepository::class)
@@ -60,6 +61,7 @@ class Rdv
 
     /**
      * @ORM\ManyToOne(targetEntity=Prestation::class, inversedBy="rdvs")
+
      */
     private $rdvPrestation;
 

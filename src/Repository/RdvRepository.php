@@ -18,6 +18,48 @@ class RdvRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Rdv::class);
     }
+    public  function CountRdv()
+    {
+
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+
+        $queryBuilder->select('COUNT(r.id)')
+            ->from(Rdv::class, 'r');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+    public  function status($value)
+    {
+
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+
+        $queryBuilder->select('COUNT(r.id)')
+            ->from(Rdv::class, 'r')
+            ->andWhere('r.rdvStatus = :val')
+            ->setParameter('val', $value);
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+    public  function statu($value)
+    {
+
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+
+        $queryBuilder->select('COUNT(r.id)')
+            ->from(Rdv::class, 'r')
+            ->andWhere('r.rdvStatus = :val')
+            ->setParameter('val', $value);
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
+
 
     // /**
     //  * @return Rdv[] Returns an array of Rdv objects

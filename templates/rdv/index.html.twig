@@ -3,31 +3,31 @@
 {% block title %}Rdv index{% endblock %}
 
 {% block content %}
-<div class="app-content content">
+ <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
             <div class="content-header row">
             </div>
             <div class="content-body">
-{{ form_start(form) }}
+{#{{ form_start(form) }}
 <div class="form-row align-items-end" >
 <div class="col">
  {{ form_row(form.numeroRdv) }}
 </div>
   <div class="col">
  {{ form_row(form.prestataire) }}
-</div>  
+</div>   #}
 {# <div class="col">
  {{ form_row(form.dateCreation) }}
 </div> #}
- <div class="col">
+ {# <div class="col">
  <div class="form-group">
  <button type="submit" class="btn btn-success">Rechercher</button>
  </div>
 </div>
-</div>
-{{ form_end(form) }}
+</div> #}
+{# {{ form_end(form) }} #}
 
     <h3>liste des rendez vous</h3>
 
@@ -36,11 +36,11 @@
             <tr>
               {#  <th>Id</th> #}
                 <th>NumeroRdv</th>
-                {# <th>Resultat</th> #}
-                <th>Commentaire</th>
+                <th>Client</th> 
+                <th>Status</th>
                 <th>Prix</th>
-                {# <th>ClientSatisfat</th> #}
-                <th>Prestataire</th>
+                <th>Prestation</th>
+                <th>Ligne</th> 
                 <th>actions</th>
             </tr>
         </thead>
@@ -48,15 +48,18 @@
         {% for rdv in rdvs %}
             <tr>
               {#}  <td>{{ rdv.id }}</td>#}
+              {# <td>{{ rdv.clientSatisfat ? 'Yes' : 'No' }}</td> #}
                 <td>{{ rdv.numeroRdv }}</td>
-                {# <td>{{ rdv.resultat }}</td> #}
-                <td>{{ rdv.commentaire }}</td>
+                <td>{{ rdv.customer }}</td>
+                <td>{{ rdv.rdvStatus}}</td>
                 <td>{{ rdv.prix }}</td>
-                {# <td>{{ rdv.clientSatisfat ? 'Yes' : 'No' }}</td> #}
-                <td>{{ rdv.prestataire.prenom}}</td>
+                
+                <td>{{ rdv.rdvPrestation}}</td> 
+                 <td>{{ rdv.rdvLigne}}</td> 
                 <td>
-                    <a href="{{ path('rdv_show', {'id': rdv.id}) }}">show</a>
-                    <a href="{{ path('rdv_edit', {'id': rdv.id}) }}">edit</a>
+                   <button type="button" class="btn btn-secondary float-left " style="margin-top: 5px"> <a href="{{ path('rdv_show', {'id': rdv.id}) }}">Afficher  </a></button>
+                   <button type="button" class="btn btn-secondary float-left " style="margin-top: 5px"> <a href="{{ path('rdv_edit', {'id': rdv.id}) }}">Modifier</a></button>
+                    <button type="button" class="btn btn-secondary float-left " style="margin-top: 5px"><a href="{{ path('rdv_affecter', {'id': rdv.id}) }}">Affecter  </a></button>
                 </td>
             </tr>
         {% else %}

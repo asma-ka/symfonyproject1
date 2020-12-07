@@ -106,7 +106,7 @@ class ClientController extends AbstractController
              $clid->setAdress($request->get('adresnam'));
              $clid->setCordonees($request->get('cordonnee'));
          
-                $em->persist($clt);
+                $em->persist($clid);
                 $em->flush();
                 return $this->redirectToRoute('client_index');
         
@@ -132,4 +132,6 @@ class ClientController extends AbstractController
 
         return $this->redirectToRoute('client_index');
     }
+    
+       
 }

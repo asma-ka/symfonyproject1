@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rdv index{% endblock %}
+{% block title %}Lister les interventions{% endblock %}
 
 {% block content %}
 <div class="app-content content">
@@ -17,27 +17,36 @@
             <tr>
               {#  <th>Id</th> #}
                 <th>NumeroRdv</th>
-                {# <th>Resultat</th> #}
-                <th>Commentaire</th>
                 <th>Prix</th>
-                {# <th>ClientSatisfat</th> #}
-                {#<th>Signature</th>#}
+                <th>Client</th> 
+                <th>Status</th>
+                
+                <th>Prestation</th>
+                <th>Ligne</th>
+                <th>Prestataire</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for rdv in rdvs %}
+        {% for rdv in interventions %}
             <tr>
               {#}  <td>{{ rdv.id }}</td>#}
                 <td>{{ rdv.numeroRdv }}</td>
-                {# <td>{{ rdv.resultat }}</td> #}
-                <td>{{ rdv.commentaire }}</td>
                 <td>{{ rdv.prix }}</td>
-                {# <td>{{ rdv.clientSatisfat ? 'Yes' : 'No' }}</td> #}
-             {#}   <td>{{ rdv.signature }}</td>#}
+                
+                <td>{{ rdv.customer }}</td>
+                <td>{{ rdv.rdvStatus}}</td>
+               <td>{{ rdv.rdvPrestation}}</td>
+                <td>{{ rdv.rdvLigne}}</td>
+                <td>{{ rdv.prestataire }}</td>
+                 
+
                 <td>
-                    <a href="{{ path('intervention_show', {'id': rdv.id}) }}">show</a>
-                    <a href="{{ path('intervention_edit', {'id': rdv.id}) }}">edit</a>
+                    {# <a href="{{ path('intervention_show', {'id': rdv.id}) }}">show</a>
+                    <a href="{{ path('intervention_edit', {'id': rdv.id}) }}">edit</a> #}
+                     <button type="button" class="btn btn-secondary float-left " style="margin-top: 5px"> <a href="{{ path('intervention_show', {'id': rdv.id}) }}">Afficher  </a></button>
+                   <button type="button" class="btn btn-secondary float-left " style="margin-top: 5px"> <a href="{{ path('intervention_edit', {'id': rdv.id}) }}">Modifier</a></button>
+                
                 </td>
             </tr>
         {% else %}

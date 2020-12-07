@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %}Calendrier
+{% endblock %}
+
+{% block stylesheets %}
+    	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.js" integrity="sha256-oenhI3DRqaPoTMAVBBzQUjOKPEdbdFFtTCNIosGwro0=" crossorigin="anonymous"></script>
+     
+	<style>
+		#calendrier {
+			width: 80%;
+			margin: auto;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	{# {{dump(data)}} #}
+	<div id="calendrier"></div>
+{% endblock %}
+
+{% block javascripts %}
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        			<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.4.0/main.min.js" integrity="sha256-oenhI3DRqaPoTMAVBBzQUjOKPEdbdFFtTCNIosGwro0=" crossorigin="anonymous"></script>
+
+	<script>
+		window.onload = () => {
+let calendarElt = document.querySelector("#calendrier")
+let calendar = new FullCalendar.Calendar(calendarElt, {
+initialView: 'timeGridWeek',
+locale: 'fr',
+timeZone: 'Europe/Paris',
+headerToolbar: {
+start: 'prev,next today',
+center: 'title',
+end: 'dayGridMonth,timeGridWeek'
+},
+editable: true,
+eventResizableFromStart: true
+})
+
+
+
+calendar.render()
+}
+	</script>
+
+{% endblock %}

@@ -22,13 +22,13 @@
                 <div class="card-body">
                         <form method="post" class="icons-tab-steps wizard-circle">
                             <label for="firstName11 ">numero de Rendez vous : </label>
-                            <input  type="text "  value="{{numRdv}}"  class="form-control " disbled="disabled" name="nmrdv" id="name ">
+                            <input  type="text "  disabled="disabled" value="{{numRdv}}"  class="form-control " disbled="disabled" name="nmrdv" id="name ">
 
                              <label for="firstName11">Crée par : </label>
-                             <input type="text" name="nuser" class="form-control" value="{{app.user.nom}}  {{app.user.prenom}}" name="crpar" id="name">
+                             <input type="text"  disabled="disabled" name="nuser" class="form-control" value="{{app.user.nom}}  {{app.user.prenom}}" name="crpar" id="name">
 
                               <label for="lastName11">Statut :</label>
-                             <input type="text" class="form-control" disbled="disabled"  value="{{ 'traitee'|readable_enum('RdvStatuType') }}" name='statut' id="fname"> 
+                             <input type="text"  disabled="disabled" class="form-control" disbled="disabled"  value="{{ 'traitee'|readable_enum('RdvStatuType') }}" name='statut' id="fname"> 
 
 
 
@@ -123,11 +123,11 @@
                          
                                             
                   
-
-                               <button type="submit" class="btn btn-primary float-right">
+ <button type="submit" class="btn btn-primary float-right" " style= "margin-top: 100px">
                 
                 
-                                 {{ button_label|default('Save') }}</button>
+                                 {{ button_label|default('Enregistrer') }}</button>
+                                 <button type="button" class="btn btn-secondary float-left " style="margin-top: 100px"> <a href="{{ path('intervention_index') }}">Retour </a></button>
                         </form>
 
 
@@ -144,7 +144,7 @@
 
     
 </div>
-    <button type="button" class="btn btn-secondary float-left " style="margin-top: -41px"> <a href="{{ path('rdv_index') }}">Retour </a></button>
+    
     
     </div>
     </div>

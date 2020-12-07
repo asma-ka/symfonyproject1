@@ -11,11 +11,11 @@
             <div class="content-body"style="margin-top: -20px">
     <h1>Edit Rdv</h1>
 
-    {{ include('rdv/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('rdv/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('rdv_index') }}">back to list</a>
+    <button type="button" class="btn btn-secondary float-right " style="margin-top: 20px"><a href="{{ path('rdv_index') }}">retour</a></button>
 
-    {{ include('rdv/_delete_form.html.twig') }}
+    {# {{ include('rdv/_delete_form.html.twig') }} #}
 
 </div>
     </div>
